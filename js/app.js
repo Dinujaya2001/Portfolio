@@ -1,11 +1,10 @@
-// Environment initialized
-const scrollProgress = document.getElementById('scroll-progress');
-
-// Dynamic Scroll Progress Bar Indicator
-window.addEventListener('scroll', () => {
-    const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-    if (totalScroll > 0) {
-        const percentage = (window.scrollY / totalScroll) * 100;
-        scrollProgress.style.width = `${percentage}%`;
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize AOS (Animate On Scroll)
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
+    });
+    console.log('NovaStack Core Initialized.');
 });
