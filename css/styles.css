@@ -1,17 +1,10 @@
 @layer utilities {
-    /* Glassmorphism Styling for Cards & Navigation */
+    /* Glassmorphism Styling */
     .glass-card {
-        background: rgba(15, 23, 42, 0.65);
+        background: rgba(15, 23, 42, 0.75);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    
-    .glass-card-light {
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(0, 0, 0, 0.05);
     }
 }
 
@@ -28,4 +21,43 @@
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #2563EB;
+}
+
+/* ------------------------------------
+   LIGHT MODE OVERRIDES
+------------------------------------ */
+html, body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html:not(.dark) {
+    color-scheme: light;
+}
+
+html:not(.dark) body {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+}
+
+html:not(.dark) nav {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    border-color: rgba(226, 232, 240, 0.8) !important;
+}
+
+html:not(.dark) .nav-link {
+    color: #334155 !important;
+}
+
+html:not(.dark) .nav-link:hover {
+    color: #2563EB !important;
+    background-color: #F1F5F9 !important;
+}
+
+html:not(.dark) #mobile-menu {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-color: #E2E8F0 !important;
+}
+
+html:not(.dark) a.group span.text-white {
+    color: #0F172A !important;
 }
