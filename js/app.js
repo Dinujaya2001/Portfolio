@@ -66,3 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('NovaStack Core Initialized Successfully.');
 });
+// VanillaTilt 3D Effect Controller
+if (typeof VanillaTilt !== 'undefined') {
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+        max: 12,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.25,
+    });
+}
