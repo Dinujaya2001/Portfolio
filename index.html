@@ -144,136 +144,287 @@
             </div>
         </nav>
     </header>
-    <!-- Hero Section -->
-    <section id="hero"
-        class="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 lg:py-20 overflow-hidden">
 
-        <!-- Background Gradient Glow Orbs -->
-        <div class="absolute top-1/4 left-10 w-72 h-72 bg-brandBlue/20 rounded-full blur-3xl -z-10 pointer-events-none">
-        </div>
-        <div
-            class="absolute bottom-10 right-10 w-96 h-96 bg-brandCyan/15 rounded-full blur-3xl -z-10 pointer-events-none">
-        </div>
+<!-- Hero Section -->
+<section id="hero" class="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 lg:py-20 overflow-hidden">
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+    <!-- Background Gradient Glow Orbs -->
+    <div class="absolute top-1/4 left-10 w-72 h-72 bg-brandBlue/20 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-brandCyan/15 rounded-full blur-3xl -z-10 pointer-events-none"></div>
 
-                <!-- Left Column: Bio & Call To Actions (7 Columns) -->
-                <div class="lg:col-span-7 text-center lg:text-left" data-aos="fade-right" data-aos-duration="1000">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
 
-                    <!-- Live Availability Badge -->
-                    <div
-                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-medium mb-6 backdrop-blur-md">
-                        <span class="relative flex h-2.5 w-2.5">
-                            <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                        </span>
-                        Available for New Opportunities
-                    </div>
+            <!-- Left Column: Bio & Call To Actions (7 Columns) -->
+            <div class="lg:col-span-7 text-center lg:text-left" data-aos="fade-right" data-aos-duration="1000">
 
-                    <!-- Main Greeting & Name -->
-                    <h1
-                        class="font-space text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
-                        Hello, I'm <br class="hidden sm:inline" />
-                        <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-brandSky via-brandBlue to-brandCyan">
-                            Dinujaya Tharaka
-                        </span>
-                    </h1>
-
-                    <!-- Typing Dynamic Text -->
-                    <div
-                        class="mt-4 text-xl sm:text-2xl font-semibold text-slate-300 font-poppins h-12 flex items-center justify-center lg:justify-start gap-2">
-                        <span>I am a</span>
-                        <span id="typed-text"
-                            class="text-brandSky font-bold underline decoration-brandBlue decoration-wavy underline-offset-4"></span>
-                    </div>
-
-                    <!-- Intro Description -->
-                    <p class="mt-4 text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        Passionate Software Engineering undergraduate specializing in robust backend architectures with
-                        <strong class="text-slate-200">Java & Spring Boot</strong>, combined with sleek Android and
-                        responsive web solutions.
-                    </p>
-
-                    <!-- Action CTA Buttons -->
-                    <div class="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                        <a href="assets/docs/Resume.pdf" download target="_blank"
-                            class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandCyan text-white font-medium text-sm sm:text-base shadow-lg shadow-brandBlue/30 hover:shadow-brandBlue/50 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
-                            <i class="fa-solid fa-download"></i> Download CV
-                        </a>
-                        <a href="projects.html"
-                            class="px-6 py-3.5 rounded-xl glass-card text-slate-200 hover:text-white border border-slate-700/60 hover:border-brandSky/50 hover:bg-slate-800/60 font-medium text-sm sm:text-base hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
-                            <i class="fa-solid fa-laptop-code"></i> View Projects
-                        </a>
-                    </div>
-
-                    <!-- Quick Tech Stack Badges -->
-                    <div
-                        class="mt-10 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-slate-400 text-sm">
-                        <span class="font-semibold text-slate-300">Core Tech:</span>
-                        <div class="flex flex-wrap items-center gap-3">
-                            <span
-                                class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300 hover:border-brandSky/40 transition-colors"><i
-                                    class="fa-fab fa-java text-orange-400 mr-1.5"></i>Java</span>
-                            <span
-                                class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300 hover:border-brandSky/40 transition-colors"><i
-                                    class="fa-solid fa-leaf text-emerald-400 mr-1.5"></i>Spring Boot</span>
-                            <span
-                                class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300 hover:border-brandSky/40 transition-colors"><i
-                                    class="fa-brands fa-android text-emerald-500 mr-1.5"></i>Android</span>
-                            <span
-                                class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300 hover:border-brandSky/40 transition-colors"><i
-                                    class="fa-solid fa-database text-blue-400 mr-1.5"></i>MySQL</span>
-                        </div>
-                    </div>
-
+                <!-- Live Availability Badge -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-medium mb-6 backdrop-blur-md">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                    </span>
+                    Available for New Opportunities
                 </div>
 
-                <!-- Right Column: Interactive Profile Card Frame with VanillaTilt (5 Columns) -->
-                <div class="lg:col-span-5 flex justify-center" data-aos="zoom-in" data-aos-duration="1000">
-                    <div class="tilt-card relative group w-full max-w-sm sm:max-w-md p-4 rounded-3xl glass-card border border-slate-700/50 shadow-2xl shadow-brandBlue/10 hover:border-brandSky/40 transition-all duration-300"
-                        data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                <!-- Main Greeting & Name -->
+                <h1 class="font-space text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
+                    Hello, I'm <br class="hidden sm:inline" />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandSky via-brandBlue to-brandCyan">
+                        Dinujaya Tharaka
+                    </span>
+                </h1>
 
-                        <!-- Profile Frame Background Accent -->
-                        <div
-                            class="relative overflow-hidden rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700/40">
-                            <img src="images/profile.webp"
-                                onerror="this.src='images/pic-prof.png'"
-                                alt="Dinujaya Tharaka Profile"
-                                class="w-full h-[380px] sm:h-[420px] object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+                <!-- Typing Dynamic Text -->
+                <div class="mt-4 text-xl sm:text-2xl font-semibold text-slate-300 font-poppins h-12 flex items-center justify-center lg:justify-start gap-2">
+                    <span>I am a</span>
+                    <span id="typed-text" class="text-brandSky font-bold underline decoration-brandBlue decoration-wavy underline-offset-4"></span>
+                </div>
 
-                            <!-- Overlay Gradient on Image -->
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent">
-                            </div>
+                <!-- Intro Description -->
+                <p class="mt-4 text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Passionate Software Engineering undergraduate specializing in robust backend architectures with
+                    <strong class="text-slate-200">Java & Spring Boot</strong>, combined with sleek Android and
+                    responsive web solutions.
+                </p>
 
-                            <!-- Floating Quick Info Tag on Image -->
-                            <div
-                                class="absolute bottom-4 left-4 right-4 p-3 rounded-xl glass-card border border-white/10 backdrop-blur-md flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-white font-space font-bold text-sm">Dinujaya Tharaka</h3>
-                                    <p class="text-slate-400 text-xs">Software Engineer</p>
-                                </div>
-                                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn Profile"
-                                    class="w-8 h-8 rounded-lg bg-brandBlue/30 hover:bg-brandBlue text-brandSky hover:text-white flex items-center justify-center transition-colors">
-                                    <i class="fa-brands fa-linkedin-in text-sm"></i>
-                                </a>
-                            </div>
-                        </div>
+                <!-- Action CTA Buttons & Primary GitHub Link -->
+                <div class="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                    <a href="https://github.com/Dinujaya2001" target="_blank"
+                        class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandCyan text-white font-medium text-sm sm:text-base shadow-lg shadow-brandBlue/30 hover:shadow-brandBlue/50 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
+                        <i class="fa-brands fa-github text-lg"></i> GitHub Profile
+                    </a>
+                    <a href="assets/docs/Resume.pdf" download target="_blank"
+                        class="px-6 py-3.5 rounded-xl glass-card text-slate-200 hover:text-white border border-slate-700/60 hover:border-brandSky/50 hover:bg-slate-800/60 font-medium text-sm sm:text-base hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i> Download CV
+                    </a>
+                    <a href="projects.html"
+                        class="px-6 py-3.5 rounded-xl glass-card text-slate-200 hover:text-white border border-slate-700/60 hover:border-brandSky/50 hover:bg-slate-800/60 font-medium text-sm sm:text-base hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
+                        <i class="fa-solid fa-laptop-code"></i> Projects
+                    </a>
+                </div>
 
+                <!-- Quick Tech Stack Badges -->
+                <div class="mt-10 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-slate-400 text-sm">
+                    <span class="font-semibold text-slate-300">Core Tech:</span>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <span class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300 hover:border-brandSky/40 transition-colors">
+                            <i class="fa-brands fa-java text-orange-400 mr-1.5"></i>Java
+                        </span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300 hover:border-brandSky/40 transition-colors">
+                            <i class="fa-solid fa-leaf text-emerald-400 mr-1.5"></i>Spring Boot
+                        </span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300 hover:border-brandSky/40 transition-colors">
+                            <i class="fa-brands fa-android text-emerald-500 mr-1.5"></i>Android
+                        </span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300 hover:border-brandSky/40 transition-colors">
+                            <i class="fa-solid fa-database text-blue-400 mr-1.5"></i>MySQL
+                        </span>
                     </div>
                 </div>
 
             </div>
+
+            <!-- Right Column: Interactive Profile Card Frame with VanillaTilt (5 Columns) -->
+            <div class="lg:col-span-5 flex justify-center" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="tilt-card relative group w-full max-w-sm sm:max-w-md p-4 rounded-3xl glass-card border border-slate-700/50 shadow-2xl shadow-brandBlue/10 hover:border-brandSky/40 transition-all duration-300"
+                    data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+
+                    <!-- Profile Frame Background Accent -->
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700/40">
+                        <img src="images/profile.webp" onerror="this.src='images/pic-prof.png'"
+                            alt="Dinujaya Tharaka Profile"
+                            class="w-full h-[380px] sm:h-[420px] object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+
+                        <!-- Overlay Gradient on Image -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+
+                        <!-- Floating Quick Info Tag & Dual Social Icons on Image -->
+                        <div class="absolute bottom-4 left-4 right-4 p-3 rounded-xl glass-card border border-white/10 backdrop-blur-md flex items-center justify-between">
+                            <div>
+                                <h3 class="text-white font-space font-bold text-sm">Dinujaya Tharaka</h3>
+                                <p class="text-slate-400 text-xs">Software Engineer</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <a href="https://github.com/Dinujaya2001" target="_blank" aria-label="GitHub Profile"
+                                    class="w-8 h-8 rounded-lg bg-slate-800/80 hover:bg-brandBlue text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-slate-700">
+                                    <i class="fa-brands fa-github text-sm"></i>
+                                </a>
+                                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn Profile"
+                                    class="w-8 h-8 rounded-lg bg-brandBlue/30 hover:bg-brandBlue text-brandSky hover:text-white flex items-center justify-center transition-colors border border-brandBlue/40">
+                                    <i class="fa-brands fa-linkedin-in text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <!-- About & Stats Section -->
+    <section id="about" class="py-16 lg:py-24 relative border-t border-slate-800/60">
+        
+        <!-- Background Accent Glow -->
+        <div class="absolute top-1/2 right-0 w-96 h-96 bg-brandBlue/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center space-y-3 mb-16" data-aos="fade-up">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brandBlue/10 border border-brandBlue/20 text-brandSky text-xs font-semibold uppercase tracking-widest">
+                    <i class="fa-solid fa-user-gear"></i> Getting To Know Me
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-space text-white">
+                    Architecting Code with <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandSky to-brandBlue">Purpose & Precision</span>
+                </h2>
+                <p class="text-slate-400 text-base max-w-2xl mx-auto">
+                    Passionate about clean architecture, scalable enterprise backends, and modular software design.
+                </p>
+            </div>
+
+            <!-- Content Grid: Bio & Focus Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+                
+                <!-- Left Column: Detailed Bio & Education Card (Col Span 7) -->
+                <div class="lg:col-span-7 space-y-6" data-aos="fade-right">
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-4 border border-slate-800">
+                        <h3 class="text-2xl font-bold font-space text-white flex items-center gap-3">
+                            <span class="w-2 h-6 bg-brandSky rounded-full"></span>
+                            Software Engineering Undergraduate
+                        </h3>
+                        <p class="text-slate-300 leading-relaxed text-base">
+                            I am a Software Engineering undergraduate dedicated to building robust, enterprise-grade applications. My primary focus revolves around <strong class="text-brandSky">Java & the Spring Boot framework</strong>, where I design high-performance REST APIs, relational database schemas, and clean backend systems.
+                        </p>
+                        <p class="text-slate-400 leading-relaxed text-sm">
+                            Whether it's building scalable m-commerce solutions, engineering mobile experiences for Android, or implementing complex relational database models, I advocate for strict code readability, modular architecture, and industry standard practices.
+                        </p>
+
+                        <!-- Key Pillars Grid -->
+                        <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800/80">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-brandBlue/20 flex items-center justify-center text-brandSky">
+                                    <i class="fa-solid fa-code text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white text-sm font-semibold">Clean Code</h4>
+                                    <p class="text-slate-400 text-xs">Maintainable & Modular</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-brandSky/20 flex items-center justify-center text-brandSky">
+                                    <i class="fa-solid fa-server text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white text-sm font-semibold">Backend First</h4>
+                                    <p class="text-slate-400 text-xs">Robust REST Services</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education Badge -->
+                    <div class="glass-card p-5 rounded-xl border border-slate-800/80 flex items-center gap-4 hover:border-brandBlue/40 transition-colors">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brandBlue to-brandSky flex items-center justify-center text-white text-xl font-bold shrink-0 shadow-md">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-brandSky font-semibold uppercase tracking-wider">Education</span>
+                            <h4 class="text-white font-bold font-space text-base">BSc (Hons) in Software Engineering</h4>
+                            <p class="text-slate-400 text-xs">Undergraduate Student • Focus on Distributed Systems & Database Architecture</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Core Specialization Cards (Col Span 5) -->
+                <div class="lg:col-span-5 space-y-4" data-aos="fade-left">
+                    
+                    <!-- Specialization 1 -->
+                    <div class="glass-card p-5 rounded-2xl border border-slate-800 hover:border-brandBlue/50 transition-all duration-300 group">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 rounded-xl bg-slate-800 group-hover:bg-brandBlue text-brandSky group-hover:text-white transition-colors">
+                                <i class="fa-brands fa-java text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg font-space group-hover:text-brandSky transition-colors">Backend Engineering</h4>
+                                <p class="text-slate-400 text-xs mt-1 leading-relaxed">Designing scalable REST APIs using Java, Spring Boot, Hibernate ORM, and MySQL database engines.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialization 2 -->
+                    <div class="glass-card p-5 rounded-2xl border border-slate-800 hover:border-brandBlue/50 transition-all duration-300 group">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 rounded-xl bg-slate-800 group-hover:bg-brandBlue text-brandSky group-hover:text-white transition-colors">
+                                <i class="fa-brands fa-android text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg font-space group-hover:text-brandSky transition-colors">Android Mobile Engineering</h4>
+                                <p class="text-slate-400 text-xs mt-1 leading-relaxed">Developing native Android apps with XML layouts, Firebase integrations, and SQLite offline synchronization.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialization 3 -->
+                    <div class="glass-card p-5 rounded-2xl border border-slate-800 hover:border-brandBlue/50 transition-all duration-300 group">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 rounded-xl bg-slate-800 group-hover:bg-brandBlue text-brandSky group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-database text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg font-space group-hover:text-brandSky transition-colors">Database & System Architecture</h4>
+                                <p class="text-slate-400 text-xs mt-1 leading-relaxed">Normalizing SQL databases, query optimization, entity relationship management, and Git Flow collaboration.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Dynamic Animated Counter Section -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-aos="zoom-in">
+                
+                <div class="glass-card p-6 rounded-2xl text-center border border-slate-800 hover:border-brandSky/30 transition-all">
+                    <div class="text-3xl sm:text-4xl font-extrabold font-space text-transparent bg-clip-text bg-gradient-to-r from-brandSky to-brandBlue">
+                        <span class="counter" data-target="15">0</span>+
+                    </div>
+                    <p class="text-slate-400 text-xs sm:text-sm font-medium mt-1">Completed Projects</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl text-center border border-slate-800 hover:border-brandSky/30 transition-all">
+                    <div class="text-3xl sm:text-4xl font-extrabold font-space text-transparent bg-clip-text bg-gradient-to-r from-brandSky to-brandBlue">
+                        <span class="counter" data-target="500">0</span>+
+                    </div>
+                    <p class="text-slate-400 text-xs sm:text-sm font-medium mt-1">Git Commits</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl text-center border border-slate-800 hover:border-brandSky/30 transition-all">
+                    <div class="text-3xl sm:text-4xl font-extrabold font-space text-transparent bg-clip-text bg-gradient-to-r from-brandSky to-brandBlue">
+                        <span class="counter" data-target="5">0</span>+
+                    </div>
+                    <p class="text-slate-400 text-xs sm:text-sm font-medium mt-1">Tech Stack Mastery</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl text-center border border-slate-800 hover:border-brandSky/30 transition-all">
+                    <div class="text-3xl sm:text-4xl font-extrabold font-space text-transparent bg-clip-text bg-gradient-to-r from-brandSky to-brandBlue">
+                        <span class="counter" data-target="100">0</span>%
+                    </div>
+                    <p class="text-slate-400 text-xs sm:text-sm font-medium mt-1">Commitment to Quality</p>
+                </div>
+
+            </div>
+
         </div>
     </section>
-
-    <!-- Main Content Area -->
-    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <h1 class="text-3xl font-bold font-space text-brandSky">Ready for Lesson 03</h1>
     </main>
+
+
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
@@ -281,6 +432,7 @@
 
     <script src="js/typing.js"></script>
     <script src="js/scroll.js"></script>
+    <script src="js/github.js"></script>
     <script src="js/app.js"></script>
 </body>
 
