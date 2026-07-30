@@ -1,14 +1,13 @@
-// Typed.js Dynamic Role Animation Configuration
 document.addEventListener('DOMContentLoaded', () => {
     const typedElement = document.getElementById('typed-text');
     if (typedElement && typeof Typed !== 'undefined') {
         new Typed('#typed-text', {
             strings: [
                 'Software Engineer.',
-                'Java Developer.',
+                'Java Specialist.',
                 'Backend Developer.',
-                'Web Developer.',
-                'UI/UX Designer.'
+                'Android Engineer.',
+                'UI/UX Enthusiast.'
             ],
             typeSpeed: 60,
             backSpeed: 40,

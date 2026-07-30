@@ -1,15 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize AOS (Animate On Scroll)
+    // 1. Initialize AOS Animations
     if (typeof AOS !== 'undefined') {
         AOS.init({
             duration: 800,
             easing: 'ease-in-out',
-            once: true,
-            mirror: false
+            once: true
         });
     }
 
-    // 2. Mobile Menu Toggle Controller
+    // 2. Mobile Menu Controller
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const menuIcon = document.getElementById('menu-icon');
@@ -27,12 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Dark / Light Mode Theme Controller
+    // 3. Dark/Light Theme Switching Logic
     const themeToggleBtn = document.getElementById('theme-toggle');
     const darkIcon = document.getElementById('theme-toggle-dark-icon');
     const lightIcon = document.getElementById('theme-toggle-light-icon');
 
-    const updateIcons = () => {
+    const updateThemeIcons = () => {
         const isDark = document.documentElement.classList.contains('dark');
         if (isDark) {
             darkIcon.classList.add('hidden');
@@ -43,35 +42,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Load Initial Icons
-    updateIcons();
+    updateThemeIcons();
 
-    // Theme Switch Click Event
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
-            // Toggle the dark class on HTML tag
             document.documentElement.classList.toggle('dark');
-            
-            // Save to LocalStorage
             if (document.documentElement.classList.contains('dark')) {
                 localStorage.setItem('theme', 'dark');
             } else {
                 localStorage.setItem('theme', 'light');
             }
-            
-            // Update the Sun/Moon Icons
-            updateIcons();
+            updateThemeIcons();
         });
     }
-
-    console.log('NovaStack Core Initialized Successfully.');
 
     // 4. Skills Category Filtering & Live Search Engine
     const skillTabs = document.querySelectorAll('.skill-tab-btn');
     const skillCards = document.querySelectorAll('.skill-card');
     const skillSearchInput = document.getElementById('skill-search');
 
-    // Filter Function
     const filterSkills = () => {
         const activeTab = document.querySelector('.skill-tab-btn.active');
         const category = activeTab ? activeTab.getAttribute('data-category') : 'all';
@@ -94,58 +83,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Tab Button Clicks
     skillTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             skillTabs.forEach(t => {
-                t.classList.remove('active', 'bg-brandBlue', 'text-white', 'shadow-lg');
+                t.classList.remove('active', 'bg-brandBlue', 'text-white');
                 t.classList.add('glass-card', 'text-slate-300');
             });
-            tab.classList.add('active', 'bg-brandBlue', 'text-white', 'shadow-lg');
+            tab.classList.add('active', 'bg-brandBlue', 'text-white');
             tab.classList.remove('glass-card', 'text-slate-300');
 
             filterSkills();
         });
     });
 
-    // Live Search Input Listener
     if (skillSearchInput) {
         skillSearchInput.addEventListener('input', filterSkills);
     }
-
-    // 5. Skill Bar Progress Animation on Scroll
-    const skillBars = document.querySelectorAll('.skill-bar');
-    let skillBarsAnimated = false;
-
-    const animateSkillBars = () => {
-        skillBars.forEach(bar => {
-            const progress = bar.getAttribute('data-progress');
-            bar.style.width = progress;
-        });
-    };
-
-    if (skillBars.length > 0) {
-        const skillsSection = document.getElementById('skills');
-        if (skillsSection) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !skillBarsAnimated) {
-                        animateSkillBars();
-                        skillBarsAnimated = true;
-                    }
-                });
-            }, { threshold: 0.2 });
-
-            observer.observe(skillsSection);
-        }
-    }
 });
-// VanillaTilt 3D Effect Controller
+
+// Initialize VanillaTilt 3D Effect
 if (typeof VanillaTilt !== 'undefined') {
     VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
         max: 12,
         speed: 400,
         glare: true,
-        "max-glare": 0.25,
+        "max-glare": 0.2
     });
 }
