@@ -1,624 +1,376 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dinujaya Tharaka - Software Engineer & Backend Developer Portfolio">
-    <title>Dinujaya Tharaka | Software Engineer</title>
+    <title>W.H.D.Tharaka | Software Engineer</title>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Tailwind CSS CDN -->
+    <!-- External CSS Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#0F172A',
-                        brandBlue: '#2563EB',
-                        brandSky: '#38BDF8',
-                        brandCyan: '#06B6D4',
-                    },
-                    fontFamily: {
-                        poppins: ['Poppins', 'sans-serif'],
-                        inter: ['Inter', 'sans-serif'],
-                        space: ['Space Grotesk', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Instant Theme Injector Script -->
-    <script>
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script>
-
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- FontAwesome Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/animation.css">
-
-
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body
-    class="bg-slate-900 text-slate-100 font-inter antialiased selection:bg-brandBlue selection:text-white min-h-screen flex flex-col justify-between transition-colors duration-300">
+<body class="px-4 sm:px-8 lg:px-20 xl:px-40">
 
-    <!-- Scroll Progress Bar -->
-    <div id="scroll-progress"
-        class="fixed top-0 left-0 h-1 bg-gradient-to-r from-brandBlue via-brandSky to-brandCyan z-50 transition-all duration-150">
+    <!-- Interactive Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- 3D Code Matrix Container -->
+    <div id="code-model"></div>
+
+    <!-- Navigation Section -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-filter backdrop-blur-lg py-4">
+        <div class="container mx-auto px-6 md:px-20 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold gradient-text">Tharaka<span class="code-char">Dev</span></a>
+            <div class="hidden text-xl md:flex space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-accent">Home</a>
+                <a href="#about" class="nav-link text-white hover:text-accent">About</a>
+                <a href="#skills" class="nav-link text-white hover:text-accent">Skills</a>
+                <a href="#experience" class="nav-link text-white hover:text-accent">Experience</a>
+                <a href="#projects" class="nav-link text-white hover:text-accent">Projects</a>
+                <a href="#contact" class="nav-link text-white hover:text-accent">Contact</a>
+            </div>
+            <button id="menu-btn" class="md:hidden hamburger focus:outline-none">
+                <i class="fas fa-bars text-2xl text-white"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-black/90 z-40 flex flex-col items-center justify-center space-y-8">
+        <button id="close-btn" class="absolute top-6 right-6 text-2xl text-white">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#home" class="text-3xl font-bold gradient-text nav-link">Home</a>
+        <a href="#about" class="text-3xl font-bold gradient-text nav-link">About</a>
+        <a href="#skills" class="text-3xl font-bold gradient-text nav-link">Skills</a>
+        <a href="#experience" class="text-3xl font-bold gradient-text nav-link">Experience</a>
+        <a href="#projects" class="text-3xl font-bold gradient-text nav-link">Projects</a>
+        <a href="#contact" class="nav-link text-white hover:text-accent">Contact</a>
     </div>
 
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-40 w-full transition-all duration-300">
-        <nav class="glass-card border-b border-slate-800/50 bg-slate-900/80 backdrop-blur-md">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-16">
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col justify-center pt-20">
+        <div class="terminal-effect p-8 rounded-lg max-w-3xl mx-auto w-full">
+            <div class="flex items-center mb-4">
+                <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <div class="mb-6">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 gradient-text code-font">> Hello_World()</h1>
+                <h2 class="text-2xl sm:text-3xl text-gray-300">I'm <span class="code-char">W.H.D. Tharaka</span>, a <span class="gradient-text">Software Engineer</span></h2>
+            </div>
+            <div class="text-gray-400 mb-8 code-font">
+                <p class="mb-2"><span class="text-blue-400">></span> <span class="code-char">const</span> coreTech = [<span class="text-yellow-300">"Java"</span>, <span class="text-yellow-300">"Spring Boot"</span>, <span class="text-yellow-300">"Android Native"</span>, <span class="text-yellow-300">"REST APIs"</span>];</p>
+                <p><span class="text-blue-400">></span> <span class="code-char">let</span> focus = <span class="text-yellow-300">"Building clean, modular backend & mobile systems"</span>;</p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+                <a href="#projects" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-teal-500 rounded font-medium hover:opacity-90 transition-opacity hover:shadow-lg hover:shadow-blue-500/30">
+                    <i class="fas fa-code mr-2"></i> View Projects
+                </a>
+                <a href="https://github.com/Dinujaya2001" target="_blank" class="px-6 py-3 border border-blue-400 rounded font-medium hover:bg-blue-900/30 transition-colors hover:shadow-lg hover:shadow-blue-500/10">
+                    <i class="fab fa-github mr-2"></i> GitHub Profile
+                </a>
+            </div>
+        </div>
+        <div class="mt-20 text-center scroll-indicator">
+            <a href="#about" class="inline-block">
+                <i class="fas fa-chevron-down text-3xl text-white opacity-70"></i>
+            </a>
+        </div>
+    </section>
 
-                    <!-- Logo -->
-                    <a href="index.html" class="flex items-center gap-2 group">
-                        <span
-                            class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brandBlue to-brandSky flex items-center justify-center text-white font-space font-bold text-lg shadow-lg shadow-brandBlue/30 group-hover:scale-105 transition-transform duration-300">
-                            DT
-                        </span>
-                        <span
-                            class="font-space font-bold text-xl tracking-tight text-white group-hover:text-brandSky transition-colors duration-300">
-                            W.H.D.Tharaka<span class="text-brandSky">.</span>
-                        </span>
-                    </a>
-
-                    <!-- Desktop Navigation Links -->
-                    <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                        <a href="#hero"
-                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-brandSky bg-slate-800/60 border border-slate-700/50">Home</a>
-                        <a href="#about"
-                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/40 transition-all duration-200">About</a>
-                        <a href="#skills"
-                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/40 transition-all duration-200">Skills</a>
-                        <a href="#projects"
-                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/40 transition-all duration-200">Projects</a>
-                        <a href="#contact"
-                            class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/40 transition-all duration-200">Contact</a>
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-16 text-center section-title">About <span class="gradient-text">Me</span></h2>
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2 relative">
+                    <div class="relative inline-block">
+                        <img src="profile.JPG" alt="W.H.D. Tharaka" class="rounded-lg w-full max-w-md border-4 border-gray-800 shadow-xl floating">
+                        <div class="absolute -inset-4 border-2 border-blue-400 rounded-lg opacity-70 -z-10"></div>
+                        <div class="absolute -inset-8 border-2 border-teal-400 rounded-lg opacity-40 -z-20"></div>
                     </div>
-
-                    <!-- Right Theme & Mobile Controls -->
-                    <div class="flex items-center gap-3">
-                        <button id="theme-toggle" type="button" aria-label="Toggle Theme"
-                            class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/60 border border-slate-800 focus:outline-none transition-all duration-200">
-                            <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg hidden"></i>
-                            <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg"></i>
-                        </button>
-
-                        <button id="mobile-menu-btn" type="button" aria-label="Toggle Mobile Menu"
-                            class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/60 border border-slate-800 focus:outline-none transition-all duration-200">
-                            <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
-                        </button>
+                </div>
+                <div class="lg:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4 gradient-text">Who am I?</h3>
+                    <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+                        I am a dedicated Software Engineer specializing in full-stack backend development and mobile applications. Driven by clean code design, object-oriented architecture, and scalable system structures.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-center">
+                            <div class="mr-3 text-blue-400"><i class="fas fa-user-tie text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-white">Full Name</h4>
+                                <p class="text-gray-400">W.H.D. Tharaka</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="mr-3 text-blue-400"><i class="fab fa-github text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-white">GitHub</h4>
+                                <p class="text-gray-400">Dinujaya2001</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="mr-3 text-blue-400"><i class="fas fa-laptop-code text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-white">Role</h4>
+                                <p class="text-gray-400">Software Engineer</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="mr-3 text-blue-400"><i class="fas fa-map-marker-alt text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-white">Location</h4>
+                                <p class="text-gray-400">Sri Lanka</p>
+                            </div>
+                        </div>
                     </div>
-
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://github.com/Dinujaya2001" target="_blank" class="px-6 py-2 border border-blue-400 rounded-full hover:bg-blue-900/30 transition-colors">
+                            <i class="fab fa-github mr-2"></i> GitHub
+                        </a>
+                        <a href="#" class="px-6 py-2 border border-blue-400 rounded-full hover:bg-blue-900/30 transition-colors">
+                            <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                        </a>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Mobile Dropdown Drawer -->
-            <div id="mobile-menu"
-                class="hidden md:hidden border-t border-slate-800/60 bg-slate-900/95 backdrop-blur-xl px-4 pt-3 pb-5 space-y-2">
-                <a href="#hero"
-                    class="block px-3 py-2.5 rounded-lg text-base font-medium text-brandSky bg-slate-800/80 border border-slate-700/50">
-                    <i class="fa-solid fa-house mr-2"></i> Home
-                </a>
-                <a href="#about"
-                    class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 transition-all duration-200">
-                    <i class="fa-solid fa-user mr-2"></i> About
-                </a>
-                <a href="#skills"
-                    class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 transition-all duration-200">
-                    <i class="fa-solid fa-code mr-2"></i> Skills
-                </a>
-                <a href="#contact"
-                    class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 transition-all duration-200">
-                    <i class="fa-solid fa-envelope mr-2"></i> Contact
-                </a>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-black/50">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-16 text-center section-title">My <span class="gradient-text">Skills</span></h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="skill-card p-6 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4"><i class="fab fa-java"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Java</h3>
+                    <p class="text-gray-400">OOP principles, backend business logic, collections, enterprise application design</p>
+                </div>
+                <div class="skill-card p-6 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4"><i class="fas fa-leaf"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Spring Boot</h3>
+                    <p class="text-gray-400">RESTful API development, Spring Security, JPA/Hibernate, modular service layers</p>
+                </div>
+                <div class="skill-card p-6 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4"><i class="fab fa-android"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Android Studio</h3>
+                    <p class="text-gray-400">Native Android Development (Java, XML UI layouts, Google Maps SDK, Activities)</p>
+                </div>
+                <div class="skill-card p-6 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4"><i class="fas fa-database"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Databases</h3>
+                    <p class="text-gray-400">MySQL, SQLite local storage, Firebase Realtime Database & Firestore</p>
+                </div>
+                <div class="skill-card p-6 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4"><i class="fab fa-js"></i></div>
+                    <h3 class="text-xl font-bold mb-2">JavaScript</h3>
+                    <p class="text-gray-400">ES6+, DOM Manipulation, Async/Await, WebGL / 3D Graphics integrating</p>
+                </div>
+                <div class="skill-card p-6 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4"><i class="fas fa-cloud"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Cloud & Firebase</h3>
+                    <p class="text-gray-400">Firebase Auth, Firestore, Remote Config, Cloud Storage integration</p>
+                </div>
+                <div class="skill-card p-6 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4"><i class="fab fa-git-alt"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Git & GitHub</h3>
+                    <p class="text-gray-400">Version control, repository management, structured commits, branching models</p>
+                </div>
+                <div class="skill-card p-6 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4"><i class="fas fa-sitemap"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Architecture</h3>
+                    <p class="text-gray-400">Clean Architecture, Modular Systems, SOLID design principles</p>
+                </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </section>
 
-    <main class="flex-grow">
-
-        <!-- Hero Section -->
-        <section id="hero"
-            class="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 lg:py-20 overflow-hidden">
-            <div
-                class="absolute top-1/4 left-10 w-72 h-72 bg-brandBlue/20 rounded-full blur-3xl -z-10 pointer-events-none">
-            </div>
-            <div
-                class="absolute bottom-10 right-10 w-96 h-96 bg-brandCyan/15 rounded-full blur-3xl -z-10 pointer-events-none">
-            </div>
-
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-
-                    <div class="lg:col-span-7 text-center lg:text-left" data-aos="fade-right" data-aos-duration="1000">
-                        <div
-                            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-medium mb-6 backdrop-blur-md">
-                            <span class="relative flex h-2.5 w-2.5">
-                                <span
-                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                            </span>
-                            Available for New Opportunities
+    <!-- Experience Section -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-16 text-center section-title">Software Engineering <span class="gradient-text">Focus</span></h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="timeline-item mb-12">
+                    <div class="bg-gray-900/50 p-6 rounded-lg hover:bg-gray-900/70 transition-colors">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                            <h3 class="text-2xl font-bold gradient-text">Full Stack & Mobile Development</h3>
+                            <span class="text-blue-400 font-medium">Active Engineer</span>
                         </div>
-
-                        <h1
-                            class="font-space text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
-                            Hello, I'm <br class="hidden sm:inline" />
-                            <span
-                                class="text-transparent bg-clip-text bg-gradient-to-r from-brandSky via-brandBlue to-brandCyan">
-                                Dinujaya Tharaka
-                            </span>
-                        </h1>
-
-                        <div
-                            class="mt-4 text-xl sm:text-2xl font-semibold text-slate-300 font-poppins h-12 flex items-center justify-center lg:justify-start gap-2">
-                            <span>I am a</span>
-                            <span id="typed-text"
-                                class="text-brandSky font-bold underline decoration-brandBlue decoration-wavy underline-offset-4"></span>
-                        </div>
-
-                        <p class="mt-4 text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                            Passionate Software Engineering undergraduate specializing in robust backend architectures
-                            with
-                            <strong class="text-slate-200">Java & Spring Boot</strong>, combined with sleek Android and
-                            responsive web solutions.
+                        <h4 class="text-xl text-white mb-2">Enterprise & Mobile Software Projects</h4>
+                        <p class="text-gray-400 mb-4">
+                            Engineering full-stack architectures utilizing Java & Spring Boot for backend services alongside Android Native and Web client frontends.
                         </p>
-
-                        <div class="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                            <a href="https://github.com/Dinujaya2001" target="_blank"
-                                class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandCyan text-white font-medium text-sm sm:text-base shadow-lg shadow-brandBlue/30 hover:shadow-brandBlue/50 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
-                                <i class="fa-brands fa-github text-lg"></i> GitHub Profile
-                            </a>
-                            <a href="https://www.linkedin.com/in/dinujaya2001/" target="_blank"
-                                class="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm sm:text-base shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
-                                <i class="fa-brands fa-linkedin text-lg"></i> LinkedIn Profile
-                            </a>
-                        </div>
-
-                        <div
-                            class="mt-10 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-slate-400 text-sm">
-                            <span class="font-semibold text-slate-300">Core Stack:</span>
-                            <div class="flex flex-wrap items-center gap-3">
-                                <span
-                                    class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300">
-                                    <i class="fa-brands fa-java text-orange-400 mr-1.5"></i>Java
-                                </span>
-                                <span
-                                    class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300">
-                                    <i class="fa-solid fa-leaf text-emerald-400 mr-1.5"></i>Spring Boot
-                                </span>
-                                <span
-                                    class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300">
-                                    <i class="fa-brands fa-android text-emerald-500 mr-1.5"></i>Android
-                                </span>
-                                <span
-                                    class="px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/50 text-xs font-mono text-slate-300">
-                                    <i class="fa-solid fa-database text-blue-400 mr-1.5"></i>MySQL
-                                </span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Profile Tilt Card -->
-                    <div class="lg:col-span-5 flex justify-center" data-aos="zoom-in" data-aos-duration="1000">
-                        <div class="tilt-card relative group w-full max-w-sm sm:max-w-md p-4 rounded-3xl glass-card border border-slate-700/50 shadow-2xl shadow-brandBlue/10 hover:border-brandSky/40 transition-all duration-300"
-                            data-tilt data-tilt-max="15" data-tilt-speed="400">
-
-                            <div
-                                class="relative overflow-hidden rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700/40">
-                                <img id="gh-avatar" src="https://github.com/Dinujaya2001.png"
-                                    alt="Dinujaya Tharaka Profile"
-                                    class="w-full h-[380px] sm:h-[420px] object-cover object-center group-hover:scale-105 transition-transform duration-500" />
-
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent">
-                                </div>
-
-                                <div
-                                    class="absolute bottom-4 left-4 right-4 p-3 rounded-xl glass-card border border-white/10 backdrop-blur-md flex items-center justify-between">
-                                    <div class="text-left">
-                                        <h3 id="gh-name" class="text-white font-space font-bold text-sm">Dinujaya
-                                            Tharaka</h3>
-                                        <p id="gh-bio" class="text-slate-400 text-xs">Software Engineering Undergraduate
-                                        </p>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <a href="https://github.com/Dinujaya2001" target="_blank"
-                                            aria-label="GitHub Profile"
-                                            class="w-8 h-8 rounded-lg bg-slate-800/80 hover:bg-brandBlue text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-slate-700">
-                                            <i class="fa-brands fa-github text-sm"></i>
-                                        </a>
-                                        <a href="https://www.linkedin.com/in/dinujaya2001/" target="_blank"
-                                            aria-label="LinkedIn Profile"
-                                            class="w-8 h-8 rounded-lg bg-brandBlue/30 hover:bg-brandBlue text-brandSky hover:text-white flex items-center justify-center transition-colors border border-brandBlue/40">
-                                            <i class="fa-brands fa-linkedin-in text-sm"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Java</span>
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Spring Boot</span>
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Android</span>
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">MySQL</span>
                         </div>
                     </div>
-
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- About & Education Section -->
-        <section id="about" class="py-16 lg:py-24 relative border-t border-slate-800/60">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                <div class="text-center space-y-3 mb-16" data-aos="fade-up">
-                    <div
-                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brandBlue/10 border border-brandBlue/20 text-brandSky text-xs font-semibold uppercase tracking-widest">
-                        <i class="fa-solid fa-user-gear"></i> Profile & Education
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-black/50 parallax-bg">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-16 text-center section-title">Featured <span class="gradient-text">Projects</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1: GroceryLk -->
+                <div class="project-card rounded-lg overflow-hidden relative">
+                    <div class="h-48 bg-gradient-to-r from-blue-900 to-teal-900 flex items-center justify-center">
+                        <i class="fas fa-shopping-basket text-6xl text-white opacity-50"></i>
                     </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold font-space text-white">
-                        Architecting Software with <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-brandSky to-brandBlue">Purpose &
-                            Precision</span>
-                    </h2>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
-
-                    <!-- Education Details Column -->
-                    <div class="lg:col-span-7 space-y-6 text-left" data-aos="fade-right">
-
-                        <!-- Education Card 1: Java Institute -->
-                        <div
-                            class="glass-card p-6 rounded-2xl border border-slate-800 space-y-3 hover:border-brandSky/40 transition-all">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs text-brandSky font-semibold uppercase tracking-wider">Undergraduate
-                                    Studies</span>
-                                <span
-                                    class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full border border-slate-700">Present</span>
-                            </div>
-                            <h3 class="text-xl font-bold font-space text-white">BSc (Hons) / BEng (Hons) in Software
-                                Engineering</h3>
-                            <p class="text-slate-300 text-sm font-medium">Java Institute for Advanced Technology</p>
-                            <p class="text-slate-400 text-xs leading-relaxed">
-                                Specialized in Software Architecture, Distributed Backend Systems, Database Engineering,
-                                and High-Performance Java Enterprise Applications.
-                            </p>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 gradient-text">GroceryLk M-Commerce App</h3>
+                        <p class="text-gray-400 mb-4">
+                            M-commerce mobile solution built with Android Native Java, Firebase Auth, SQLite, and integrated Google Maps tracking API.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Android Studio</span>
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Firebase</span>
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">SQLite</span>
                         </div>
-
-                        <!-- LinkedIn Verified Qualification Badge -->
-                        <div
-                            class="glass-card p-5 rounded-2xl border border-slate-800/80 flex items-center justify-between hover:border-brandBlue/40 transition-colors">
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brandBlue to-brandSky flex items-center justify-center text-white text-xl font-bold shrink-0 shadow-md">
-                                    <i class="fa-solid fa-award"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-bold font-space text-base">LinkedIn Verified Credentials
-                                    </h4>
-                                    <p class="text-slate-400 text-xs">Connected with Username: Dinujaya Tharaka</p>
-                                </div>
-                            </div>
-                            <a href="https://www.linkedin.com/in/dinujaya2001/" target="_blank"
-                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-all">
-                                <i class="fa-brands fa-linkedin"></i> View LinkedIn
+                        <div class="flex justify-between">
+                            <a href="https://github.com/Dinujaya2001" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">
+                                <i class="fab fa-github mr-2"></i> GitHub Repos
                             </a>
                         </div>
-
                     </div>
-
-                    <!-- Specializations Column -->
-                    <div class="lg:col-span-5 space-y-4 text-left" data-aos="fade-left">
-
-                        <div
-                            class="glass-card p-5 rounded-2xl border border-slate-800 hover:border-brandBlue/50 transition-all duration-300 group">
-                            <div class="flex items-start gap-4">
-                                <div
-                                    class="p-3 rounded-xl bg-slate-800 group-hover:bg-brandBlue text-brandSky group-hover:text-white transition-colors">
-                                    <i class="fa-brands fa-java text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h4
-                                        class="text-white font-bold text-lg font-space group-hover:text-brandSky transition-colors">
-                                        Backend Systems</h4>
-                                    <p class="text-slate-400 text-xs mt-1">Java, Spring Boot, Hibernate ORM, RESTful Web
-                                        Services & REST API Security.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="glass-card p-5 rounded-2xl border border-slate-800 hover:border-brandBlue/50 transition-all duration-300 group">
-                            <div class="flex items-start gap-4">
-                                <div
-                                    class="p-3 rounded-xl bg-slate-800 group-hover:bg-brandBlue text-brandSky group-hover:text-white transition-colors">
-                                    <i class="fa-brands fa-android text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h4
-                                        class="text-white font-bold text-lg font-space group-hover:text-brandSky transition-colors">
-                                        Android Mobile Apps</h4>
-                                    <p class="text-slate-400 text-xs mt-1">Native XML Layouts, Java logic, Firebase
-                                        backend & SQLite local databases.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="glass-card p-5 rounded-2xl border border-slate-800 hover:border-brandBlue/50 transition-all duration-300 group">
-                            <div class="flex items-start gap-4">
-                                <div
-                                    class="p-3 rounded-xl bg-slate-800 group-hover:bg-brandBlue text-brandSky group-hover:text-white transition-colors">
-                                    <i class="fa-solid fa-database text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h4
-                                        class="text-white font-bold text-lg font-space group-hover:text-brandSky transition-colors">
-                                        Relational Database Design</h4>
-                                    <p class="text-slate-400 text-xs mt-1">MySQL Normalization, Complex SQL Queries, ER
-                                        Diagramming & Schema Design.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
                 </div>
-
-                <!-- Dynamic Live GitHub Stats Grid -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-aos="zoom-in">
-
-                    <div
-                        class="glass-card p-6 rounded-2xl text-center border border-slate-800 hover:border-brandSky/30 transition-all">
-                        <div
-                            class="text-3xl sm:text-4xl font-extrabold font-space text-transparent bg-clip-text bg-gradient-to-r from-brandSky to-brandBlue flex items-center justify-center gap-1">
-                            <span id="gh-repos" class="counter">0</span>
-                            <span class="text-brandSky">+</span>
-                        </div>
-                        <p class="text-slate-400 text-xs sm:text-sm font-medium mt-1">Public Repos</p>
+                <!-- Project 2: Golden Plate -->
+                <div class="project-card rounded-lg overflow-hidden relative">
+                    <div class="h-48 bg-gradient-to-r from-purple-900 to-indigo-900 flex items-center justify-center">
+                        <i class="fas fa-utensils text-6xl text-white opacity-50"></i>
                     </div>
-
-                    <div
-                        class="glass-card p-6 rounded-2xl text-center border border-slate-800 hover:border-brandSky/30 transition-all">
-                        <div
-                            class="text-3xl sm:text-4xl font-extrabold font-space text-transparent bg-clip-text bg-gradient-to-r from-brandSky to-brandBlue flex items-center justify-center gap-1">
-                            <span id="gh-followers" class="counter">0</span>
-                            <span class="text-brandSky">+</span>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 gradient-text">The Golden Plate DB System</h3>
+                        <p class="text-gray-400 mb-4">
+                            Normalized relational database system architected for restaurant operations including Customer, Orders, and Items entities.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">MySQL</span>
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Relational Schema</span>
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">SQL Query Optimization</span>
                         </div>
-                        <p class="text-slate-400 text-xs sm:text-sm font-medium mt-1">GitHub Followers</p>
-                    </div>
-
-                    <div
-                        class="glass-card p-6 rounded-2xl text-center border border-slate-800 hover:border-brandSky/30 transition-all">
-                        <div
-                            class="text-3xl sm:text-4xl font-extrabold font-space text-transparent bg-clip-text bg-gradient-to-r from-brandSky to-brandBlue flex items-center justify-center gap-1">
-                            <span id="gh-stars" class="counter">0</span>
-                            <span class="text-brandSky">+</span>
+                        <div class="flex justify-between">
+                            <a href="https://github.com/Dinujaya2001" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">
+                                <i class="fab fa-github mr-2"></i> GitHub Repos
+                            </a>
                         </div>
-                        <p class="text-slate-400 text-xs sm:text-sm font-medium mt-1">Total Stars</p>
                     </div>
-
-                    <div
-                        class="glass-card p-6 rounded-2xl text-center border border-slate-800 hover:border-brandSky/30 transition-all">
-                        <div
-                            class="text-3xl sm:text-4xl font-extrabold font-space text-transparent bg-clip-text bg-gradient-to-r from-brandSky to-brandBlue flex items-center justify-center gap-1">
-                            <span id="gh-commits" class="counter">0</span>
-                            <span class="text-brandSky">+</span>
+                </div>
+                <!-- Project 3: 3D Portfolio -->
+                <div class="project-card rounded-lg overflow-hidden relative">
+                    <div class="h-48 bg-gradient-to-r from-green-900 to-teal-900 flex items-center justify-center">
+                        <i class="fas fa-cube text-6xl text-white opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 gradient-text">Interactive 3D Portfolio</h3>
+                        <p class="text-gray-400 mb-4">
+                            High-performance modern WebGL interactive personal portfolio with custom particle matrix rendered with Three.js.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Three.js</span>
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">JavaScript</span>
+                            <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Tailwind CSS</span>
                         </div>
-                        <p class="text-slate-400 text-xs sm:text-sm font-medium mt-1">Total Commits</p>
+                        <div class="flex justify-between">
+                            <a href="https://github.com/Dinujaya2001" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">
+                                <i class="fab fa-github mr-2"></i> GitHub Repos
+                            </a>
+                        </div>
                     </div>
-
                 </div>
             </div>
-        </section>
-
-        <!-- Skills Visualization Section -->
-        <section id="skills" class="py-16 lg:py-24 relative border-t border-slate-800/60">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                <div class="text-center space-y-3 mb-12" data-aos="fade-up">
-                    <div
-                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brandSky/10 border border-brandSky/20 text-brandSky text-xs font-semibold uppercase tracking-widest">
-                        <span class="relative flex h-2 w-2">
-                            <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brandSky opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-brandSky"></span>
-                        </span>
-                        Live GitHub Synced Skills
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold font-space text-white">
-                        Skills & <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-brandSky via-brandBlue to-brandCyan">Tech
-                            Stack</span>
-                    </h2>
-                </div>
-
-                <!-- Skill Filter Tabs -->
-                <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10" data-aos="fade-up">
-                    <div class="flex flex-wrap items-center justify-center gap-2 w-full md:w-auto"
-                        id="skill-category-tabs">
-                        <button data-category="all"
-                            class="skill-tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brandBlue text-white transition-all">All
-                            Skills</button>
-                        <button data-category="backend"
-                            class="skill-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-card text-slate-300 hover:text-white transition-all">Backend</button>
-                        <button data-category="frontend"
-                            class="skill-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-card text-slate-300 hover:text-white transition-all">Frontend</button>
-                        <button data-category="mobile"
-                            class="skill-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-card text-slate-300 hover:text-white transition-all">Mobile
-                            & DB</button>
-                    </div>
-
-                    <div class="relative w-full md:w-64">
-                        <i
-                            class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input type="text" id="skill-search" placeholder="Search skill (e.g. Java)..."
-                            class="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 text-sm focus:outline-none focus:border-brandSky">
-                    </div>
-                </div>
-
-                <!-- Skills Dynamic Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="skills-container"
-                    data-aos="fade-up">
-
-                    <!-- Java Card -->
-                    <div class="skill-card glass-card p-6 rounded-2xl border border-slate-800" data-category="backend"
-                        data-name="java">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-3">
-                                <i class="fa-brands fa-java text-2xl text-orange-400"></i>
-                                <div>
-                                    <h3 class="text-white font-bold text-base">Java</h3>
-                                    <span class="text-slate-400 text-xs">Backend Core</span>
-                                </div>
-                            </div>
-                            <span class="text-brandSky font-mono font-bold text-lg skill-percent">95%</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="skill-bar bg-gradient-to-r from-brandBlue to-brandSky h-full rounded-full transition-all duration-1000"
-                                style="width: 0%;" data-progress="95%"></div>
-                        </div>
-                    </div>
-
-                    <!-- Spring Boot Card -->
-                    <div class="skill-card glass-card p-6 rounded-2xl border border-slate-800" data-category="backend"
-                        data-name="spring boot java microservices">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-3">
-                                <i class="fa-solid fa-leaf text-2xl text-emerald-400"></i>
-                                <div>
-                                    <h3 class="text-white font-bold text-base">Spring Boot</h3>
-                                    <span class="text-slate-400 text-xs">Framework</span>
-                                </div>
-                            </div>
-                            <span class="text-brandSky font-mono font-bold text-lg skill-percent">85%</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="skill-bar bg-gradient-to-r from-brandBlue to-brandSky h-full rounded-full transition-all duration-1000"
-                                style="width: 0%;" data-progress="85%"></div>
-                        </div>
-                    </div>
-
-                    <!-- HTML Card -->
-                    <div class="skill-card glass-card p-6 rounded-2xl border border-slate-800" data-category="frontend"
-                        data-name="html html5">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-3">
-                                <i class="fa-brands fa-html5 text-2xl text-orange-500"></i>
-                                <div>
-                                    <h3 class="text-white font-bold text-base">HTML5</h3>
-                                    <span class="text-slate-400 text-xs">Web Structure</span>
-                                </div>
-                            </div>
-                            <span class="text-brandSky font-mono font-bold text-lg skill-percent">100%</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="skill-bar bg-gradient-to-r from-brandBlue to-brandSky h-full rounded-full transition-all duration-1000"
-                                style="width: 0%;" data-progress="100%"></div>
-                        </div>
-                    </div>
-
-                    <!-- CSS Card -->
-                    <div class="skill-card glass-card p-6 rounded-2xl border border-slate-800" data-category="frontend"
-                        data-name="css css3 tailwind">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-3">
-                                <i class="fa-brands fa-css3-alt text-2xl text-blue-400"></i>
-                                <div>
-                                    <h3 class="text-white font-bold text-base">CSS3 & Tailwind</h3>
-                                    <span class="text-slate-400 text-xs">Styling</span>
-                                </div>
-                            </div>
-                            <span class="text-brandSky font-mono font-bold text-lg skill-percent">90%</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="skill-bar bg-gradient-to-r from-brandBlue to-brandSky h-full rounded-full transition-all duration-1000"
-                                style="width: 0%;" data-progress="90%"></div>
-                        </div>
-                    </div>
-
-                    <!-- JS Card -->
-                    <div class="skill-card glass-card p-6 rounded-2xl border border-slate-800" data-category="frontend"
-                        data-name="javascript js es6">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-3">
-                                <i class="fa-brands fa-js text-2xl text-yellow-400"></i>
-                                <div>
-                                    <h3 class="text-white font-bold text-base">JavaScript</h3>
-                                    <span class="text-slate-400 text-xs">Scripting Logic</span>
-                                </div>
-                            </div>
-                            <span class="text-brandSky font-mono font-bold text-lg skill-percent">88%</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="skill-bar bg-gradient-to-r from-brandBlue to-brandSky h-full rounded-full transition-all duration-1000"
-                                style="width: 0%;" data-progress="88%"></div>
-                        </div>
-                    </div>
-
-                    <!-- MySQL Card -->
-                    <div class="skill-card glass-card p-6 rounded-2xl border border-slate-800" data-category="mobile"
-                        data-name="mysql database sql">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-3">
-                                <i class="fa-solid fa-database text-2xl text-sky-400"></i>
-                                <div>
-                                    <h3 class="text-white font-bold text-base">MySQL Engine</h3>
-                                    <span class="text-slate-400 text-xs">Relational DB</span>
-                                </div>
-                            </div>
-                            <span class="text-brandSky font-mono font-bold text-lg skill-percent">92%</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="skill-bar bg-gradient-to-r from-brandBlue to-brandSky h-full rounded-full transition-all duration-1000"
-                                style="width: 0%;" data-progress="92%"></div>
-                        </div>
-                    </div>
-
-                </div>
-
+            <div class="text-center mt-12">
+                <a href="https://github.com/Dinujaya2001" target="_blank" class="inline-block px-8 py-3 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full font-medium hover:opacity-90 transition-opacity hover:shadow-lg hover:shadow-blue-500/30">
+                    <i class="fab fa-github mr-2"></i> View All GitHub Repositories
+                </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-16 text-center section-title">Get In <span class="gradient-text">Touch</span></h2>
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">Contact Information</h3>
+                    <p class="text-gray-400 mb-8">
+                        Feel free to reach out for project collaboration, backend development tasks, or Android software inquiries!
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-blue-400 mr-4 mt-1"><i class="fab fa-github text-xl"></i></div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-1">GitHub Profile</h4>
+                                <a href="https://github.com/Dinujaya2001" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors">github.com/Dinujaya2001</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-blue-400 mr-4 mt-1"><i class="fas fa-map-marker-alt text-xl"></i></div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-1">Location</h4>
+                                <p class="text-gray-400">Sri Lanka</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-400 mb-2">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg input-field focus:border-blue-400">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-400 mb-2">Your Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg input-field focus:border-blue-400">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-gray-400 mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg input-field focus:border-blue-400">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-400 mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg input-field focus:border-blue-400"></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg font-medium hover:opacity-90 transition-opacity">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <footer class="border-t border-slate-800 bg-slate-950 py-8 text-center text-slate-500 text-sm">
-        <p>&copy; 2026 Dinujaya Tharaka (W.H.D. Tharaka). All rights reserved.</p>
+    <!-- Footer Section -->
+    <footer class="py-12 bg-black/70 border-t border-gray-800">
+        <div class="container mx-auto text-center">
+            <a href="#" class="text-2xl font-bold gradient-text inline-block mb-6">Tharaka<span class="code-char">Dev</span></a>
+            <p class="text-gray-500 mb-4">W.H.D. Tharaka — Software Engineer</p>
+            <p class="text-gray-500">© 2026 W.H.D. Tharaka. All rights reserved.</p>
+        </div>
     </footer>
 
-    <!-- JS CDN Libraries -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-
-    <!-- Custom Portfolio Logic Scripts -->
-    <script src="js/typing.js"></script>
-    <script src="js/scroll.js"></script>
-    <script src="js/github.js"></script>
-    <script src="js/app.js"></script>
+    <!-- GitHub Live Data API Integration Script & Interactions -->
+    <script src="script.js"></script>
 </body>
 
 </html>
