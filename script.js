@@ -1,17 +1,63 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // 1. Fetch GitHub User Data Dynamically from GitHub API
+  // 1. Dynamic GitHub Projects Fetching Logic
   const githubUsername = "Dinujaya2001";
-  
-  fetch(`https://api.github.com/users/${githubUsername}`)
-    .then((response) => {
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.json();
-    })
-    .then((data) => {
-      console.log("GitHub Profile Data Loaded:", data);
-      // Optional: Add dynamically rendered GitHub stats to UI if needed
-    })
-    .catch((error) => console.error("Error fetching GitHub data:", error));
+  const projectsContainer = document.getElementById("github-projects-container");
+
+  if (projectsContainer) {
+    fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=6`)
+      .then((response) => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      })
+      .then((repos) => {
+        projectsContainer.innerHTML = ""; // Loading text එක ඉවත් කිරීම
+
+        if (repos.length === 0) {
+          projectsContainer.innerHTML =
+            '<p class="text-center text-gray-400 col-span-full">No public repositories found.</p>';
+          return;
+        }
+
+        repos.forEach((repo) => {
+          const description =
+            repo.description ||
+            "Software engineering project focused on clean code, architecture, and modular system design.";
+          const language = repo.language || "Java / Code";
+          const repoUrl = repo.html_url;
+
+          const cardHTML = `
+            <div class="project-card rounded-lg overflow-hidden relative flex flex-col justify-between">
+                <div>
+                    <div class="h-40 bg-gradient-to-r from-blue-900/60 to-teal-900/60 flex items-center justify-center p-4">
+                        <i class="fas fa-code-branch text-5xl text-blue-400/60"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 gradient-text capitalize">${repo.name.replace(/-/g, " ").replace(/_/g, " ")}</h3>
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">${description}</p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-xs font-mono">${language}</span>
+                        <span class="px-3 py-1 bg-teal-900/30 text-teal-300 rounded-full text-xs font-mono">★ ${repo.stargazers_count}</span>
+                    </div>
+                    <div class="flex justify-between items-center border-t border-gray-800/80 pt-4">
+                        <a href="${repoUrl}" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium">
+                            <i class="fab fa-github mr-2"></i> View Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+          `;
+          projectsContainer.insertAdjacentHTML("beforeend", cardHTML);
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching GitHub repositories:", error);
+        projectsContainer.innerHTML =
+          '<p class="text-center text-red-400 col-span-full">Failed to load live projects. Please visit GitHub directly.</p>';
+      });
+  }
 
   // 2. Interactive Cursor Logic
   const cursor = document.querySelector(".cursor");
